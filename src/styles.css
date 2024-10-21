@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Применение кастомных цветов */
+body {
+    background-color: theme('colors.primary.light'); /* Использовать светлый цвет по умолчанию */
+}
+
+body.dark {
+    background-color: theme('colors.primary.dark'); /* Использовать темный цвет для темной темы */
+}

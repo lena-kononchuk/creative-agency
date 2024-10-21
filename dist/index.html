@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <title>Creative Agency</title>
+</head>
+
+<body class="min-h-screen flex flex-col bg-white text-gray-800 dark:bg-[#0D0D0D] dark:text-white">
+    <!-- Loader element -->
+    <div id="loader" class="flex justify-center items-center h-screen">
+        <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+            role="status">
+            <span
+                class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Main content container (hidden initially) -->
+    <div class="container mx-auto flex-1 px-5 sm:px-10 md:px-20 lg:px-32 hidden" id="main-content">
+        <!-- Header section -->
+        <header class="flex items-center justify-between py-18 md:py-[72px] md:pb-[38px] pt-[40px]">
+            <!-- Logo -->
+            <img src="./images/logo.svg" alt="Logo" class="w-[136px] h-[50px] md:w-[91px] md:h-[33px]" />
+            <!-- Navigation links -->
+            <nav class="hidden md:flex justify-center flex-1 gap-12">
+                <a href="index.html"
+                    class="relative group transition-all duration-300 transform hover:text-blue-500 hover:scale-110">Home<span
+                        class="absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300"></span></a>
+                <a href="services.html"
+                    class="relative group transition-all duration-300 transform hover:text-blue-500 hover:scale-110">About<span
+                        class="absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300"></span></a>
+                <a href="contact.html"
+                    class="relative group transition-all duration-300 transform hover:text-blue-500 hover:scale-110">Services<span
+                        class="absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300"></span></a>
+                <a href="projects.html"
+                    class="relative group transition-all duration-300 transform hover:text-blue-500 hover:scale-110">Projects<span
+                        class="absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300"></span></a>
+            </nav>
+            <!-- Contact Us button -->
+            <a href="#contact-form"
+                class="hidden md:flex border border-[#377DFF] text-[#377DFF] px-3 py-1 rounded-[24px] transition-all duration-300 transform hover:scale-110 hover:bg-[#377DFF] hover:text-white">Contact
+                Us</a>
+            <!-- Burger menu button -->
+            <div class="md:hidden">
+                <button id="burger-menu" class="focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Hidden mobile menu -->
+            <div id="mobile-menu" class="fixed inset-0 bg-gray-800 bg-opacity-80 hidden flex justify-end z-50">
+                <div class="bg-gray-900 w-4/5 p-4">
+                    <button id="close-menu" class="text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg></button>
+                    <nav class="flex flex-col mt-4 space-y-4">
+                        <a href="index.html" class="text-white hover:underline">Home</a>
+                        <a href="services.html" class="text-white hover:underline">Services</a>
+                        <a href="contact.html" class="text-white hover:underline">Contact</a>
+                        <a href="#contact-form" class="bg-blue-500 px-3 py-1 rounded hover:bg-blue-600">Contact Us</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main content section -->
+        <main class="flex-1 p-4 relative">
+            <!-- <div class="container mx-auto flex-1 px-5 sm:px-10 md:px-20 lg:px-32 hidden" id="main-content">
+                <h1
+                    class="font-nunito font-extrabold mb-6 tracking-tight text-center text-[#1D1D1D] text-[28px] leading-[38.19px] md:text-6xl md:leading-[87.3px] opacity-0 animate-slidein">
+                    Make your dream business goal come true</h1>
+                <p
+                    class="font-nunito mb-8 leading-8 tracking-tight text-center text-[#464646] text-[16px] leading-[24px] md:text-lg md:leading-8 opacity-0 animate-slidein">
+                    When you need us to improve your business, come to us to help you reach that goal.</p>
+                <a href="#contact-form"
+                    class="bg-blue-500 border border-blue-500 text-[#FFFFFF] px-6 py-3 rounded-2xl transition-all duration-300 shadow-[0px_4px_8px_0px_rgba(55,125,255,0.5)] active:scale-95 font-quicksand text-[12px] leading-[18px] font-bold md:text-[16px] md:leading-[24px] opacity-0 animate-slidein">Start
+                    Project</a>
+            </div> -->
+            <!-- Content Section -->
+            <section id="main-section" class="flex flex-col items-center justify-center pt-38 pb-75 md:pt-30 md:pb-44 ">
+                <div
+                    class="absolute top-[10%] left-[10%] flex gap-2 p-2 w-3 h-3 rounded-full bg-blue-600 animate-pulse">
+                </div>
+                <div
+                    class="absolute top-[25%] right-[20%] flex gap-2 p-2 w-3 h-3 rounded-full bg-red-600 animate-pulse">
+                </div>
+
+                <div class="text-center max-w-[767px] w-full p-4 mb-[50px] md:mb-[40px]">
+                    <h1
+                        class="font-nunito font-extrabold mb-6 tracking-tight text-center text-[#1D1D1D] text-[28px] leading-[38.19px] letter-spacing-[0.01em] md:text-6xl md:leading-[87.3px] md:tracking-tight opacity-0 animate-slidein">
+                        Make your dream business goal come true</h1>
+                    <p
+                        class="font-nunito mb-8 leading-8 tracking-tight text-center text-[#464646] text-[16px] leading-[24px] md:text-lg md:leading-8 opacity-0 animate-slidein">
+                        When you need us to improve your business, come to us to help you reach that goal. You just sit
+                        back and feel the achievement.</p>
+                    <a href="#contact-form"
+                        class="bg-blue-500 border border-blue-500 text-[#FFFFFF] px-6 py-3 rounded-2xl  shadow-[0px_4px_8px_0px_rgba(55,125,255,0.5)] active:scale-95 font-quicksand text-[12px] leading-[18px] font-bold md:text-[16px] md:leading-[24px] opacity-0 animate-slidein">Start
+                        Project</a>
+                </div>
+
+                <div class="absolute top-[30%] left-[0%] flex gap-2 p-2 w-3 h-3 rounded-full bg-red-600 animate-pulse">
+                </div>
+                <div
+                    class="absolute top-[45%] right-[0%] flex gap-2 p-2 w-3 h-3 rounded-full bg-blue-600 animate-pulse">
+                </div>
+
+                <div class="relative mx-auto max-w-5xl mt-[50px] md:mt-[40px]">
+                    <div class="absolute top-[-20px] left-[15%] flex gap-2 p-2">
+                        <div class="w-2 h-2 rounded-full animate-pulse bg-blue-600"></div>
+                        <div class="w-2 h-2 rounded-full animate-pulse bg-blue-600"></div>
+                        <div class="w-2 h-2 rounded-full animate-pulse bg-blue-600"></div>
+                        <div class="w-2 h-2 rounded-full animate-pulse bg-blue-600"></div>
+                    </div>
+
+                    <img src="/images/hero-bg.jpg" alt="Hero Image"
+                        onerror="this.onerror=null; this.src='/images/default.jpg';"
+                        class="w-[280px] h-[224px] rounded-[12px] bg-[#D9D9D9] md:w-[739px] md:h-[501px] md:rounded-[50px] opacity-0 animate-slidein">
+
+                    <div class="absolute bottom-[-20px] right-[15%] flex gap-2 p-2">
+                        <div class="w-2 h-2 rounded-full animate-pulse bg-red-600"></div>
+                        <div class="w-2 h-2 rounded-full animate-pulse bg-red-600"></div>
+                        <div class="w-2 h-2 rounded-full animate-pulse bg-red-600"></div>
+                        <div class="w-2 h-2 rounded-full animate-pulse bg-red-600"></div>
+                    </div>
+                </div>
+            </section>
+            <section class="pt-11 pb-11 md:pt-20 md:pb-[75px]">
+                <!-- Section Title -->
+                <h2
+                    class="font-quicksand text-[#377DFF] text-[14px] font-[600] leading-[17.5px] tracking-[0.01em] mb-[10px] md:text-[24px] md:leading-[24px] md:tracking-[0.01em] md:mb-[20px] text-center">
+                    About Us
+                </h2>
+                <!-- Main Section Text -->
+                <p
+                    class="font-nunito text-[#1D1D1D] text-[24px] font-[700] leading-[32.74px] tracking-[0.003em] mb-[135px] md:text-[55px] md:leading-[75.02px] md:mb-[38px] text-center">
+                    Our Teammate
+                </p>
+
+                <div class="flex flex-col gap-[50px] md:flex-row md:flex-row-reverse md:gap-[50px]">
+                    <!-- First block (text) on mobile and centered on desktop -->
+                    <div class="flex flex-col items-center justify-center w-full md:w-1/2">
+                        <!-- Added w-full for full width on mobile -->
+                        <div class="flex flex-col">
+                            <p
+                                class="font-quicksand text-[14px] font-[400] leading-[24px] tracking-[0.01em] mb-[10px] md:text-[20px] md:leading-[32px] md:mb-[24px] text-[#464646] text-left">
+                                We move with make a Creative Strategy for help your business goal, we help to improve
+                                your income by a services we have. make your content look interesting and make people
+                                look for your business
+                            </p>
+                            <p
+                                class="font-quicksand text-[14px] font-[400] leading-[24px] tracking-[0.01em] mb-[35px] md:text-[20px] md:leading-[32px] md:mb-[24px] text-[#464646] text-left">
+                                We move with make a Creative Strategy for help your business goal, we help to improve
+                                your income by a services we have. make your content look interesting and make people
+                                look for your business
+                            </p>
+                        </div>
+                        <!-- Buttons -->
+                        <div class="flex gap-2">
+                            <a href=""
+                                class="bg-blue-500 border border-blue-500 text-[#FFFFFF] px-6 py-3 rounded-2xl shadow-[0px_4px_8px_0px_rgba(55,125,255,0.5)] active:scale-95 font-quicksand text-[12px] leading-[18px] font-bold md:text-[16px] md:leading-[24px] opacity-0 animate-slidein">About
+                                Us</a>
+                            <a href=""
+                                class="hidden md:flex border border-[#377DFF] text-[#377DFF] px-3 py-1 rounded-[24px] transition-all duration-300 transform hover:scale-110 hover:bg-[#377DFF] hover:text-white">
+                                Our Story
+                                <span class="ml-2">🔊</span> <!-- Play circle icon, use appropriate symbol or icon -->
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Second block (image) -->
+                    <div class="flex flex-col items-center w-full md:w-1/2">
+                        <!-- Added w-full for full width on mobile -->
+                        <div class="relative">
+                            <!-- Left pulse dot -->
+                            <div
+                                class="w-2 h-2 rounded-full animate-pulse bg-[#FF5C00] absolute -left-2 top-1/2 transform -translate-y-1/2">
+                            </div>
+                            <!-- Image with gray background fallback -->
+                            <img src="images/about-bg.jpg" alt="Image description"
+                                class="w-[280px] h-[242px] rounded-[12px] bg-gray-300 md:w-[565px] md:h-[402px] md:rounded-[24px]"
+                                onerror="this.onerror=null;this.style.background='#D1D5DB';" />
+                            <!-- Right pulse dot -->
+                            <div
+                                class="w-2 h-2 rounded-full animate-pulse bg-[#EB00FF] absolute -right-2 top-1/2 transform -translate-y-1/2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer section -->
+    <footer class="bg-gray-800 text-white text-center p-4 dark:bg-[#383638]">
+        <div class="container mx-auto px-5 sm:px-10 md:px-20 lg:px-32">
+            <p>&copy; 2024 Creative Agency</p>
+        </div>
+    </footer>
+
+    <!-- Script file -->
+    <script src="script.js" defer></script>
+    <script>
+        // Скрываем основной контент и показываем лоадер
+        setTimeout(() => {
+            document.getElementById('loader').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+        }, 1500);
+
+        window.onload = function () {
+            // Устанавливаем дополнительную задержку перед началом анимации
+            setTimeout(() => {
+                const content = document.getElementById('main-content');
+                const animatedElements = content.querySelectorAll('.opacity-0');
+
+                animatedElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.remove('opacity-0'); // Убираем класс opacity-0
+                        el.classList.add('animate-slidein'); // Добавляем анимацию
+                    }, index * 300); // Задержка для каждого элемента
+                });
+            }, 1500); // Задержка для анимации
+        };
+    </script>
+
+
+
+</body>
+
+</html>
