@@ -10,3 +10,4 @@ body {
 body.dark {
     background-color: theme('colors.primary.dark'); /* Использовать темный цвет для темной темы */
 }
+
