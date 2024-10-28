@@ -2,12 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Применение кастомных цветов */
 body {
-    background-color: theme('colors.primary.light'); /* Использовать светлый цвет по умолчанию */
+    background-color: theme('colors.primary.light');
 }
 
-body.dark {
-    background-color: theme('colors.primary.dark'); /* Использовать темный цвет для темной темы */
+/* body.dark {
+    background-color: theme('colors.primary.dark'); 
+} */
+
+.opacity-0 {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
+.animate-slidein {
+    opacity: 1; 
+    animation: slidein 0.5s forwards; 
+}
+.custom-pagination {
+    margin-top: 40px; 
+}
+html {
+    scroll-behavior: smooth;
+}

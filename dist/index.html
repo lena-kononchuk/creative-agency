@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <title>Creative Agency</title>
 </head>
 
-<body class="min-h-screen flex flex-col bg-white text-gray-800 dark:bg-[#0D0D0D] dark:text-white">
+<body class="flex flex-col min-h-screen bg-white text-gray-800 dark:bg-[#0D0D0D] dark:text-white">
     <!-- Loader element -->
     <div id="loader" class="flex justify-center items-center h-screen text-[#377DFF] ">
         <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
@@ -19,38 +21,36 @@
                 class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
         </div>
     </div>
-
     <!-- Main content container (hidden initially) -->
-    <div class="container mx-auto flex-1 px-5 sm:px-10 md:px-20 lg:px-32 hidden" id="main-content">
+    <div class="container mx-auto flex-1 hidden" id="main-content">
         <!-- Header section -->
         <header class="flex items-center justify-between py-18 md:py-[72px] md:pb-[38px] pt-[40px]">
             <!-- Logo -->
-           <a href="#" class="cursor-pointer">
-    <img src="./images/logo.svg" alt="Logo" class="w-[136px] h-[50px] md:w-[91px] md:h-[33px]" />
-</a>
-
+            <a href="#" class="cursor-pointer">
+                <img src="./images/logo.svg" alt="Logo" class="w-[136px] h-[50px] md:w-[91px] md:h-[33px]" />
+            </a>
             <!-- Navigation links -->
             <nav class="hidden md:flex justify-center flex-1 gap-12">
-                <a href="index.html"
-                    class="relative group transition-all duration-300 transform hover:text-blue-500 hover:scale-110">Home<span
+                <a href="/"
+                    class="relative group transition-all duration-300 transform hover:text-blue-500 hover:scale-110 smooth-scrol">Home<span
                         class="absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300"></span></a>
-                <a href="services.html"
-                    class="relative group transition-all duration-300 transform hover:text-blue-500 hover:scale-110">About<span
+                <a href="#about"
+                    class="relative group transition-all duration-300 transform hover:text-blue-500 hover:scale-110 smooth-scrol">About<span
                         class="absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300"></span></a>
-                <a href="contact.html"
-                    class="relative group transition-all duration-300 transform hover:text-blue-500 hover:scale-110">Services<span
+                <a href="#services"
+                    class="relative group transition-all duration-300 transform hover:text-blue-500 hover:scale-110 smooth-scrol">Services<span
                         class="absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300"></span></a>
-                <a href="projects.html"
-                    class="relative group transition-all duration-300 transform hover:text-blue-500 hover:scale-110">Projects<span
+                <a href="#projects"
+                    class="relative group transition-all duration-300 transform hover:text-blue-500 hover:scale-110 smooth-scrol">Projects<span
                         class="absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-all duration-300"></span></a>
             </nav>
             <!-- Contact Us button -->
-            <a href="#contact-form"
+            <button  id="openContactForm"
                 class="hidden md:flex border border-[#377DFF] text-[#377DFF] px-3 py-1 rounded-[24px] transition-all duration-300 transform hover:scale-110 hover:bg-[#377DFF] hover:text-white">Contact
-                Us</a>
+                Us</button>
             <!-- Burger menu button -->
             <div class="md:hidden">
-                <button id="burger-menu" class="focus:outline-none">
+                <button id="burger-menu-button" class="focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -59,27 +59,26 @@
                 </button>
             </div>
             <!-- Hidden mobile menu -->
-            <div id="mobile-menu" class="fixed inset-0 bg-gray-800 bg-opacity-80 hidden flex justify-end z-50">
-                <div class="bg-gray-900 w-4/5 p-4">
-                    <button id="close-menu" class="text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <div id="dropdown"
+                class="fixed top-0 right-0 bg-[#1E1F26] text-white w-[80%] z-50 h-full transition-all duration-500 ease-in-out translate-x-full">
+                <div class="bg-gray-900 w-full p-4">
+                    <button id="close-menu" class="text-white">
+                        <svg class="w-8 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18L18 6M6 6l12 12"></path>
-                        </svg></button>
+                        </svg>
+                    </button>
                     <nav class="flex flex-col mt-4 space-y-4">
-                        <a href="index.html" class="text-white hover:underline">Home</a>
-                        <a href="services.html" class="text-white hover:underline">Services</a>
-                        <a href="contact.html" class="text-white hover:underline">Contact</a>
-                        <a href="#contact-form" class="bg-blue-500 px-3 py-1 rounded hover:bg-blue-600">Contact Us</a>
                     </nav>
                 </div>
             </div>
         </header>
-
         <!-- Main content section -->
-        <main class="flex-1 p-4 relative">
+        <main class="flex-1 p-4 relative scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100 overflow-y-auto">
             <!-- Content Section -->
-            <section id="main-section" class="flex flex-col items-center justify-center pt-38 pb-75 md:pt-30 md:pb-44 ">
+            <section id="main-section"
+                class="flex flex-col items-center justify-center pt-38 pb-75 md:pt-30 md:pb-44 opacity-0 transition-opacity duration-1000 delay-200">
                 <div
                     class="absolute top-[10%] left-[10%] flex gap-2 p-2 w-3 h-3 rounded-full bg-blue-600 animate-pulse">
                 </div>
@@ -95,9 +94,11 @@
                         class="font-nunito mb-8 leading-8 tracking-tight text-center text-[#464646] text-[16px] leading-[24px] md:text-lg md:leading-8 opacity-0 animate-slidein">
                         When you need us to improve your business, come to us to help you reach that goal. You just sit
                         back and feel the achievement.</p>
-                    <a href="#contact-form"
-                        class="bg-blue-500 border border-blue-500 text-[#FFFFFF] px-6 py-3 rounded-2xl  shadow-[0px_4px_8px_0px_rgba(55,125,255,0.5)] active:scale-95 font-quicksand text-[12px] leading-[18px] font-bold md:text-[16px] md:leading-[24px] opacity-0 animate-slidein">Start
-                        Project</a>
+                    <button
+                        class="w-[146px] min-w-[210px] bg-blue-500 border border-blue-500 text-white px-4 py-2 md:px-[40px] md:py-[12px] rounded-[24px] opacity-0 animate-slidein hover:shadow-[0px_4px_8px_0px_rgba(55,125,255,0.5)] active:scale-95 font-quicksand text-[12px] leading-[18px] font-bold md:text-[16px] md:leading-[24px] text-center">
+                        Start Project
+                    </button>
+
                 </div>
 
                 <div class="absolute top-[30%] left-[0%] flex gap-2 p-2 w-3 h-3 rounded-full bg-red-600 animate-pulse">
@@ -116,7 +117,7 @@
 
                     <img src="/images/hero-bg.jpg" alt="Hero Image"
                         onerror="this.onerror=null; this.src='/images/default.jpg';"
-                        class="w-[280px] h-[224px] rounded-[12px] bg-[#D9D9D9] md:w-[739px] md:h-[501px] md:rounded-[50px] opacity-0 animate-slidein">
+                        class="w-full rounded-[12px] bg-[#D9D9D9] md:w-[739px] md:h-[501px] md:rounded-[50px] opacity-0 animate-slidein">
 
                     <div class="absolute bottom-[-20px] right-[15%] flex gap-2 p-2">
                         <div class="w-2 h-2 rounded-full animate-pulse bg-red-600"></div>
@@ -126,22 +127,23 @@
                     </div>
                 </div>
             </section>
-            <section class="pt-11 pb-11 md:pt-20 md:pb-[75px]">
+            <section class="pt-11 pb-11 md:pt-20 md:pb-[75px] opacity-0 transition-opacity duration-1000 delay-200"
+                id="about">
                 <!-- Section Title -->
                 <h2
-                    class="font-quicksand text-[#377DFF] text-[14px] font-[600] leading-[17.5px] tracking-[0.01em] mb-[10px] md:text-[24px] md:leading-[24px] md:tracking-[0.01em] md:mb-[20px] text-center">
+                    class="font-quicksand text-[#377DFF] text-[14px] font-[600] leading-[17.5px] tracking-[0.01em] mb-[10px] md:text-[24px] md:leading-[24px] md:tracking-[0.01em] md:mb-[20px] text-center opacity-0 animate-slidein">
                     About Us
                 </h2>
                 <!-- Main Section Text -->
                 <p
-                    class="font-nunito text-[#1D1D1D] text-[24px] font-[700] leading-[32.74px] tracking-[0.003em] mb-[35px] md:text-[55px] md:leading-[75.02px] md:mb-[38px] text-center">
+                    class="font-nunito text-[#1D1D1D] text-[24px] font-[700] leading-[32.74px] tracking-[0.003em] mb-[35px] md:text-[55px] md:leading-[75.02px] md:mb-[38px] text-center opacity-0 animate-slidein">
                     Our Teammate
                 </p>
 
-                <div class="flex flex-col sm:flex-row-reverse gap-[50px] sm:gap-[50px]">
+                <div class="flex flex-col lg:flex-row-reverse gap-[50px] sm:gap-[50px]">
                     <!-- First block (text) on mobile and centered on desktop -->
-                    <div class="flex flex-col w-full md:w-1/2">
-                        <div class="flex flex-col items-center justify-center md:px-[30px]">
+                    <div class="flex flex-col w-full items-center justify-center">
+                        <div class="flex flex-col items-center justify-center md:px-[30px] opacity-0 animate-slidein">
                             <p
                                 class="font-quicksand text-[14px] font-[400] leading-[24px] tracking-[0.01em] mb-[10px] md:text-[20px] md:leading-[32px] md:mb-[24px] text-[#464646] text-left">
                                 We move with make a Creative Strategy for help your business goal, we help to improve
@@ -156,62 +158,70 @@
                             </p>
                         </div>
                         <!-- Buttons -->
-                        <div class="flex flex-col sm:flex-row gap-5 justify-start items-start">
+                        <div class="flex flex-col sm:flex-row gap-5 justify-center items-start ">
                             <button
-                                class="w-full min-w-[100px] bg-blue-500 border border-blue-500 text-white px-4 py-2 md:px-[40px] md:py-[12px] rounded-[24px] shadow-[0px_4px_8px_0px_rgba(55,125,255,0.5)] active:scale-95 font-quicksand text-[12px] leading-[18px] font-bold md:text-[16px] md:leading-[24px] text-center">
+                                class="w-[146px] min-w-[210px] bg-blue-500 border border-blue-500 text-white px-4 py-2 md:px-[40px] md:py-[12px] rounded-[24px] opacity-0 animate-slidein transition duration-300 hover:shadow-[0px_4px_8px_0px_rgba(55,125,255,0.5)] active:scale-95 font-quicksand text-[12px] leading-[18px] font-bold md:text-[16px] md:leading-[24px] text-center">
                                 About Us
                             </button>
                             <button
-                                class="w-full min-w-[100px] border border-[#377DFF] text-[#377DFF] px-4 py-2 md:px-[40px] md:py-[12px] rounded-[24px] transition-all duration-300 transform hover:bg-[#377DFF] hover:text-white text-center">
+                                class="w-[146px] min-w-[210px] border border-[#377DFF] text-[#377DFF] px-4 py-2 md:px-[40px] md:py-[12px] rounded-[24px] transition-all duration-300 transform hover:bg-[#377DFF] hover:text-white  font-quicksand text-[12px] leading-[18px] font-bold md:text-[16px] md:leading-[24px] text-center text-center opacity-0 animate-slidein">
                                 Our Story
                             </button>
                         </div>
                     </div>
                     <!-- Second block (image) -->
-                    <div class="flex flex-col items-center w-full md:w-1/2">
+                    <div class="flex flex-col items-center w-full ">
                         <div class="relative w-full">
-                    <div class="absolute top-[-20px] left-[15%] flex gap-2 p-2">
-                        <div class="w-2 h-2 rounded-full animate-pulse bg-[#FF5C00]"></div>
-                        <div class="w-2 h-2 rounded-full animate-pulse bg-[#FF5C00]"></div>
-                        <div class="w-2 h-2 rounded-full animate-pulse bg-[#FF5C00]"></div>
-                        <div class="w-2 h-2 rounded-full animate-pulse bg-[#FF5C00]"></div>
-                    </div>
+                            <div class="absolute top-[-20px] left-[15%] flex gap-2 p-2">
+                                <div class="w-2 h-2 rounded-full animate-pulse bg-[#FF5C00]"></div>
+                                <div class="w-2 h-2 rounded-full animate-pulse bg-[#FF5C00]"></div>
+                                <div class="w-2 h-2 rounded-full animate-pulse bg-[#FF5C00]"></div>
+                                <div class="w-2 h-2 rounded-full animate-pulse bg-[#FF5C00]"></div>
+                            </div>
 
-                    <img src="images/about-bg.jpg" alt="Image description"
+                            <img src="images/about-bg.jpg" alt="Image description"
                                 class="w-full h-auto max-h-[402px] rounded-[12px] md:max-w-none md:h-auto md:rounded-[24px] object-cover"
                                 onerror="this.onerror=null;this.style.background='#D1D5DB';" />
 
-                    <div class="absolute bottom-[-20px] right-[15%] flex gap-2 p-2">
-                        <div class="w-2 h-2 rounded-full animate-pulse bg-[#EB00FF]"></div>
-                        <div class="w-2 h-2 rounded-full animate-pulse bg-[#EB00FF]"></div>
-                        <div class="w-2 h-2 rounded-full animate-pulse bg-[#EB00FF]"></div>
-                        <div class="w-2 h-2 rounded-full animate-pulse bg-[#EB00FF]"></div>
-                    </div>
+                            <div class="absolute bottom-[-20px] right-[15%] flex gap-2 p-2">
+                                <div class="w-2 h-2 rounded-full animate-pulse bg-[#EB00FF]"></div>
+                                <div class="w-2 h-2 rounded-full animate-pulse bg-[#EB00FF]"></div>
+                                <div class="w-2 h-2 rounded-full animate-pulse bg-[#EB00FF]"></div>
+                                <div class="w-2 h-2 rounded-full animate-pulse bg-[#EB00FF]"></div>
+                            </div>
                         </div>
                     </div>
 
                 </div>
 
             </section>
-            <section class="pt-11 pb-11 md:pt-20 md:pb-[75px]">
-                <div class="flex justify-between flex-col md:flex-row gap-[50px]">
-                    <div class="w-full lg:w-1/2">
+            <section class="pt-11 pb-11 md:pt-20 md:pb-[75px] opacity-0 transition-opacity duration-1000 delay-200"
+                id="services">
+                <!-- Wrapper for content and card blocks -->
+                <div class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-[50px]">
+
+                    <!-- Block with headings and text content -->
+                    <div
+                        class="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start lg:justify-start text-center lg:text-left">
+                        <!-- Section Heading -->
                         <h2
-                            class="font-quicksand text-[#377DFF] text-[14px] font-[600] leading-[17.5px] tracking-[0.01em] mb-[10px] md:text-[24px] md:leading-[24px] md:tracking-[0.01em] md:mb-[20px] text-center md:text-start">
+                            class="font-quicksand text-[#377DFF] text-[14px] font-[600] leading-[17.5px] tracking-[0.01em] mb-[10px] md:text-[24px] md:leading-[24px] md:tracking-[0.01em] md:mb-[20px] opacity-0 animate-slidein">
                             Our Services
                         </h2>
                         <!-- Main Section Text -->
                         <p
-                            class="font-nunito text-[#1D1D1D] text-[24px] font-[700] leading-[32.74px] tracking-[0.003em] mb-[35px] md:text-[55px] md:leading-[75.02px] md:mb-[38px] text-center md:text-start">
-                            Perfect and Fast
-                            Movement </p>
-                        <p
-                            class="font-quicksand text-[14px] font-[400] leading-[24px] tracking-[0.01em] mb-[35px] md:text-[20px] md:leading-[32px] md:mb-[24px] text-[#464646] text-left">
-                            We move with make a Creative Strategy for help your business goal, we help to improve
-                            your income by a services we have. make your content look interesting and make people
-                            look for your business
+                            class="font-nunito text-[#1D1D1D] text-[24px] font-[700] leading-[32.74px] tracking-[0.003em] mb-[35px] md:text-[55px] md:leading-[75.02px] md:mb-[38px] opacity-0 animate-slidein">
+                            Perfect and Fast Movement
                         </p>
-                        <a href="#" class="items-center relative group inline-block">
+                        <!-- Supporting Paragraph -->
+                        <p
+                            class="font-quicksand text-[14px] font-[400] leading-[24px] tracking-[0.01em] mb-[35px] md:text-[20px] md:leading-[32px] md:mb-[24px] text-[#464646] opacity-0 animate-slidein">
+                            We move with make a Creative Strategy for help your business goal, we help to improve your
+                            income by a services we have. make your content look interesting and make people look for
+                            your business
+                        </p>
+                        <!-- 'Read More' Link with Hover Effects -->
+                        <a href="#" class="relative group inline-block opacity-0 animate-slidein">
                             <span class="text-[#377DFF] font-quicksand text-[14px] leading-[24px] relative">
                                 Read More
                                 <span
@@ -221,83 +231,404 @@
                                 class="fa-solid fa-arrow-right transition-transform duration-300 ml-1 text-[12px] text-[#377DFF] group-hover:translate-x-1"></i>
                         </a>
                     </div>
-<div class=" w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-[1.875em]">
-    <div class="w-[262px] h-[269px] lg:w-[262px] lg:h-[269px] flex flex-col items-center p-[1.5em] rounded-[30px] hover:shadow-[4px_4px_30px_0px_rgba(0,0,0,0.1)] border border-[#0000001A] cursor-pointer w-[262px] h-[269px]">
-        <div class="flex items-center justify-center w-[6.25em] h-[6.25em] rounded-full bg-[#377DFF] mb-[1.875em]">
-            <img src="images/sosial/monitor.svg" alt="Card Image" class="w-[3.125em] h-[3.125em]">
-        </div>
-        <p class="font-quicksand text-[1.6em] font-[700] leading-[1.5] tracking-[0.01em] text-center text-[#1D1D1D] md:text-[1.5em] md:leading-[2.13] md:text-[24px]">
-            Social Media Management
-        </p>
-    </div>
-    <div class="w-[262px] h-[269px] lg:w-[262px] lg:h-[269px] flex flex-col items-center p-[1.5em] rounded-[30px] hover:shadow-[4px_4px_30px_0px_rgba(0,0,0,0.1)] border border-[#0000001A] cursor-pointer w-[262px] h-[269px]">
-        <div class="flex items-center justify-center w-[6.25em] h-[6.25em] rounded-full bg-[#FF2D2D] mb-[1.875em]">
-            <img src="images/sosial/settings.svg" alt="Card Image" class="w-[3.125em] h-[3.125em]">
-        </div>
-        <p class="font-quicksand text-[1.6em] font-[700] leading-[1.5] tracking-[0.01em] text-center text-[#1D1D1D] md:text-[1.5em] md:leading-[2.13] md:text-[24px]">
-            Search Engine Optimization
-        </p>
-    </div>
-    <div class="w-[262px] h-[269px] lg:w-[262px] lg:h-[269px] flex flex-col items-center p-[1.5em] rounded-[30px] hover:shadow-[4px_4px_30px_0px_rgba(0,0,0,0.1)] border border-[#0000001A] cursor-pointer w-[262px] h-[269px]">
-        <div class="flex items-center justify-center w-[6.25em] h-[6.25em] rounded-full bg-[#7CE761] mb-[1.875em]">
-            <img src="images/sosial/pen-tool.svg" alt="Card Image" class="w-[3.125em] h-[3.125em]">
-        </div>
-        <p class="font-quicksand text-[1.6em] font-[700] leading-[1.5] tracking-[0.01em] text-center text-[#1D1D1D] md:text-[1.5em] md:leading-[2.13] md:text-[24px]">
-            Design
-        </p>
-    </div>
-    <div class="w-[262px] h-[269px] lg:w-[262px] lg:h-[269px] flex flex-col items-center p-[1.5em] rounded-[30px] hover:shadow-[4px_4px_30px_0px_rgba(0,0,0,0.1)] border border-[#0000001A] cursor-pointer w-[262px] h-[269px]">
-        <div class="flex items-center justify-center w-[6.25em] h-[6.25em] rounded-full bg-[#FFA800] mb-[1.875em]">
-            <img src="images/sosial/tv.svg" alt="Card Image" class="w-[3.125em] h-[3.125em]">
-        </div>
-        <p class="font-quicksand text-[1.6em] font-[700] leading-[1.5] tracking-[0.01em] text-center text-[#1D1D1D] md:text-[1.5em] md:leading-[2.13] md:text-[24px]">
-            Ads
-        </p>
-    </div>
-</div>
 
 
+                    <!-- Block with service cards -->
+                    <div
+                        class="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-[1.875em] items-center justify-center">
+                        <!-- Card 1: Social Media Management -->
+                        <div
+                            class="h-[269px] flex items-center justify-center flex-col p-[1.5em] rounded-[30px] hover:shadow-[4px_4px_30px_0px_rgba(0,0,0,0.1)] border border-[#0000001A] cursor-pointer opacity-0 animate-slidein">
+                            <div
+                                class="flex items-center justify-center w-[6.25em] h-[6.25em] rounded-full bg-[#377DFF] mb-[1.875em]">
+                                <img src="images/sosial/monitor.svg" alt="Card Image" class="w-[3.125em] h-[3.125em]">
+                            </div>
+                            <p
+                                class="font-quicksand text-[1.6em] font-[700] leading-[1.5] tracking-[0.01em] text-center text-[#1D1D1D] md:text-[1em] md:leading-[2.13]">
+                                Social Media Management
+                            </p>
+                        </div>
+
+                        <!-- Card 2: SEO -->
+                        <div
+                            class="h-[269px] flex items-center justify-center flex-col p-[1.5em] rounded-[30px] hover:shadow-[4px_4px_30px_0px_rgba(0,0,0,0.1)] border border-[#0000001A] cursor-pointer opacity-0 animate-slidein">
+                            <div
+                                class="flex items-center justify-center w-[6.25em] h-[6.25em] rounded-full bg-[#FF2D2D] mb-[1.875em]">
+                                <img src="images/sosial/settings.svg" alt="Card Image" class="w-[3.125em] h-[3.125em]">
+                            </div>
+                            <p
+                                class="font-quicksand text-[1.6em] font-[700] leading-[1.5] tracking-[0.01em] text-center text-[#1D1D1D] md:text-[1em] md:leading-[2.13]">
+                                Search Engine Optimization
+                            </p>
+                        </div>
+
+                        <!-- Card 3: Design -->
+                        <div
+                            class="h-[269px] flex items-center justify-center flex-col p-[1.5em] rounded-[30px] hover:shadow-[4px_4px_30px_0px_rgba(0,0,0,0.1)] border border-[#0000001A] cursor-pointer opacity-0 animate-slidein">
+                            <div
+                                class="flex items-center justify-center w-[6.25em] h-[6.25em] rounded-full bg-[#7CE761] mb-[1.875em]">
+                                <img src="images/sosial/pen-tool.svg" alt="Card Image" class="w-[3.125em] h-[3.125em]">
+                            </div>
+                            <p
+                                class="font-quicksand text-[1.6em] font-[700] leading-[1.5] tracking-[0.01em] text-center text-[#1D1D1D] md:text-[1em] md:leading-[2.13]">
+                                Design
+                            </p>
+                        </div>
+
+                        <!-- Card 4: Ads -->
+                        <div
+                            class="h-[269px] flex items-center justify-center flex-col p-[1.5em] rounded-[30px] hover:shadow-[4px_4px_30px_0px_rgba(0,0,0,0.1)] border border-[#0000001A] cursor-pointer opacity-0 animate-slidein">
+                            <div
+                                class="flex items-center justify-center w-[6.25em] h-[6.25em] rounded-full bg-[#FFA800] mb-[1.875em]">
+                                <img src="images/sosial/tv.svg" alt="Card Image" class="w-[3.125em] h-[3.125em]">
+                            </div>
+                            <p
+                                class="font-quicksand text-[1.6em] font-[700] leading-[1.5] tracking-[0.01em] text-center text-[#1D1D1D] md:text-[1em] md:leading-[2.13]">
+                                Ads
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section
+                class="flex flex-col items-center justify-center pt-11 pb-11 md:pt-20 md:pb-[75px] opacity-0 transition-opacity duration-1000 delay-200"
+                id="projects">
+                <h2
+                    class="font-quicksand text-[#377DFF] text-[14px] font-[600] leading-[17.5px] tracking-[0.01em] mb-[10px] md:text-[24px] md:leading-[24px] md:tracking-[0.01em] md:mb-[20px] text-center opacity-0 animate-slidein">
+                    Our Portfolio
+                </h2>
+                <!-- Main Section Text -->
+                <p
+                    class="font-nunito text-[#1D1D1D] text-[24px] font-[700] leading-[32.74px] tracking-[0.003em] mb-[35px] md:text-[55px] md:leading-[75.02px] md:mb-[38px] text-center opacity-0 animate-slidein">
+                    What do we do
+                </p>
+                <p
+                    class="font-quicksand text-[14px] font-[400] leading-[24px] tracking-[0.01em] mb-[73px] md:text-[20px] md:leading-[32px] md:mb-[73px] text-[#464646] text-center opacity-0 animate-slidein">
+                    All projects that we have already done, proven can help to use more comfortable, then can used by
+                    client from our business
+                </p>
+                <!-- New section for images -->
+                <div class="grid grid-cols-1 gap-y-[54px] mb-[73px] lg:grid-cols-3 lg:gap-x-[69px]">
+                    <div
+                        class="relative overflow-hidden transition-transform duration-300 cursor-pointer hover:scale-110 bg-gray-300 w-[100%] h-[200px] md:w-[250px] md:h-[250px] rounded-[30px] flex items-center justify-center">
+                        <img src="images/portfolio/design-app.png" alt="Image Design App"
+                            class="w-full h-full object-cover" onerror="this.style.display='none';">
+                        <div class="absolute bottom-6 left-6 text-white bg-opacity-50 px-2 py-1 rounded-md">
+                            Design App
+                        </div>
+                    </div>
+                    <div
+                        class="relative overflow-hidden transition-transform duration-300 cursor-pointer hover:scale-110 bg-gray-300 w-[100%] h-[200px] md:w-[250px] md:h-[250px] rounded-[30px] flex items-center justify-center">
+                        <img src="images/portfolio/cloud-app.png" alt="Image Cloud App"
+                            class="w-full h-full object-cover" onerror="this.style.display='none';">
+                        <div class="absolute bottom-6 left-6 text-white bg-opacity-50 px-2 py-1 rounded-md">
+                            Cloud App
+                        </div>
+                    </div>
+                    <div
+                        class="relative overflow-hidden transition-transform duration-300 cursor-pointer hover:scale-110 bg-gray-300 w-[100%] h-[200px] md:w-[250px] md:h-[250px] rounded-[30px] flex items-center justify-center">
+                        <img src="images/portfolio/furniture-app.png" alt="Image Furniture App"
+                            class="w-full h-full object-cover" onerror="this.style.display='none';">
+                        <div class="absolute bottom-6 left-6 text-white bg-opacity-50 px-2 py-1 rounded-md">
+                            Furniture App
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section
+                class="flex flex-col items-center justify-center relative pt-11 pb-11 md:pt-20 md:pb-[75px] opacity-0 transition-opacity duration-1000 delay-200">
+
+                <div class="text-center">
+                    <h2
+                        class="font-quicksand text-[#377DFF] text-[14px] font-[600] leading-[17.5px] tracking-[0.01em] mb-[10px] md:text-[24px] md:leading-[24px] md:tracking-[0.01em] opacity-0 animate-slidein">
+                        Testimonial
+                    </h2>
+                    <p
+                        class="font-nunito text-[#1D1D1D] text-[24px] font-[700] leading-[32.74px] tracking-[0.003em] mb-1 md:text-[55px] md:leading-[75.02px] opacity-0 animate-slidein">
+                        People Talk about us
+                    </p>
+                </div>
+
+                <div class="swiper mySwiper w-full h-full flex justify-center p-4">
+                    <div class="flex justify-end items-center gap-5 pr-5 z-20 min-h-[40px] mb-10">
+                        <i class="fa fa-arrow-left cursor-pointer p-4 opacity-50" id="prevButton" tabindex="0"
+                            role="button" aria-label="Previous Slide"></i>
+                        <i class="fa fa-arrow-right cursor-pointer p-4 opacity-50" id="nextButton" tabindex="0"
+                            role="button" aria-label="Next Slide"></i>
+                    </div>
+                    <div class="swiper-wrapper p-4">
+                        <div
+                            class="swiper-slide flex flex-col p-10 box-border animate-slidein  text-center bg-white rounded-[20px] shadow-custom  cursor-pointer">
+                            <div class="flex items-center mb-2">
+                                <img src="images/testimonial.png" alt="Image Testimonial"
+                                    class="w-[70px] h-[70px] rounded-full mr-4">
+                                <div class="flex flex-col">
+                                    <div
+                                        class="text-[#377DFF] text-lg font-semibold leading-[22.5px] tracking-tight text-left md:text-xl lg:text-2xl mb-2">
+                                        Angel Rose</div>
+                                    <div
+                                        class="text-[#464646] text-sm font-normal leading-[13.75px] mb-2 tracking-tight text-left opacity-50">
+                                        Creative Manager</div>
+                                </div>
+                            </div>
+                            <div class="mt-9">
+                                <p
+                                    class="text-[#464646] text-left text-base font-normal leading-6 tracking-tight md:text-lg lg:text-xl">
+                                    There are many variations passages of Lorem Ipsum majority some by words which don't
+                                    look.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="swiper-slide flex flex-col p-10 box-border animate-slidein  text-center bg-white rounded-[20px] shadow-custom cursor-pointer">
+                            <div class="flex items-center mb-2">
+                                <img src="images/testimonial.png" alt="Image Testimonial"
+                                    class="w-[70px] h-[70px] rounded-full mr-4">
+                                <div class="flex flex-col">
+                                    <div
+                                        class="text-[#377DFF] text-lg font-semibold leading-[22.5px] tracking-tight text-left md:text-xl lg:text-2xl mb-2">
+                                        Angel Rose</div>
+                                    <div
+                                        class="text-[#464646] text-sm font-normal leading-[13.75px] mb-2 tracking-tight text-left opacity-50">
+                                        Creative Manager</div>
+                                </div>
+                            </div>
+                            <div class="mt-9">
+                                <p
+                                    class="text-[#464646] text-left text-base font-normal leading-6 tracking-tight md:text-lg lg:text-xl">
+                                    There are many variations passages of Lorem Ipsum majority some by words which don't
+                                    look.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="swiper-slide flex flex-col p-10 box-border animate-slidein  text-center bg-white rounded-[20px] shadow-custom cursor-pointer">
+                            <div class="flex items-center mb-2">
+                                <img src="images/testimonial.png" alt="Image Testimonial"
+                                    class="w-[70px] h-[70px] rounded-full mr-4">
+                                <div class="flex flex-col">
+                                    <div
+                                        class="text-[#377DFF] text-lg font-semibold leading-[22.5px] tracking-tight text-left md:text-xl lg:text-2xl mb-2">
+                                        Angel Rose</div>
+                                    <div
+                                        class="text-[#464646] text-sm font-normal leading-[13.75px] mb-2 tracking-tight text-left opacity-50">
+                                        Creative Manager</div>
+                                </div>
+                            </div>
+                            <div class="mt-9">
+                                <p
+                                    class="text-[#464646] text-left text-base font-normal leading-6 tracking-tight md:text-lg lg:text-xl">
+                                    There are many variations passages of Lorem Ipsum majority some by words which don't
+                                    look.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="swiper-slide flex flex-col p-10 box-border animate-slidein  text-center bg-white rounded-[20px] shadow-custom cursor-pointer">
+                            <div class="flex items-center mb-2">
+                                <img src="images/testimonial.png" alt="Image Testimonial"
+                                    class="w-[70px] h-[70px] rounded-full mr-4">
+                                <div class="flex flex-col">
+                                    <div
+                                        class="text-[#377DFF] text-lg font-semibold leading-[22.5px] tracking-tight text-left md:text-xl lg:text-2xl mb-2">
+                                        Angel Rose</div>
+                                    <div
+                                        class="text-[#464646] text-sm font-normal leading-[13.75px] mb-2 tracking-tight text-left opacity-50">
+                                        Creative Manager</div>
+                                </div>
+                            </div>
+                            <div class="mt-9">
+                                <p
+                                    class="text-[#464646] text-left text-base font-normal leading-6 tracking-tight md:text-lg lg:text-xl">
+                                    There are many variations passages of Lorem Ipsum majority some by words which don't
+                                    look.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="swiper-slide flex flex-col p-10 box-border animate-slidein text-center bg-white rounded-[20px] shadow-custom cursor-pointer">
+                            <div class="flex items-center mb-2">
+                                <img src="images/testimonial.png" alt="Image Testimonial"
+                                    class="w-[70px] h-[70px] rounded-full mr-4">
+                                <div class="flex flex-col">
+                                    <div
+                                        class="text-[#377DFF] text-lg font-semibold leading-[22.5px] tracking-tight text-left md:text-xl lg:text-2xl mb-2">
+                                        Angel Rose</div>
+                                    <div
+                                        class="text-[#464646] text-sm font-normal leading-[13.75px] mb-2 tracking-tight text-left opacity-50">
+                                        Creative Manager</div>
+                                </div>
+                            </div>
+                            <div class="mt-9">
+                                <p
+                                    class="text-[#464646] text-left text-base font-normal leading-6 tracking-tight md:text-lg lg:text-xl">
+                                    There are many variations passages of Lorem Ipsum majority some by words which don't
+                                    look.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section
+                class="pt-11 pb-11 lg:pt-20 lg:pb-[75px] flex flex-col lg:flex-row-reverse items-center gap-0 lg:gap-[150px] opacity-0 transition-opacity duration-1000 delay-200 relative">
+                <div
+                    class="relative flex justify-center items-start lg:justify-end w-full lg:w-1/2 mb-[8em]  translate-y-[-2.375em]">
+                    <img src="images/collaboration/image1.jpg" alt="Image 1"
+                        class="w-[221px] h-[196px] lg:w-[325px] lg:h-[288px] rounded-[16px] absolute z-10 bg-[#D9D9D9] left-[4rem] top-[8.5rem]" />
+
+                    <img src="images/collaboration/image2.jpg" alt="Image 2"
+                        class="w-[221px] h-[196px] lg:w-[325px] lg:h-[288px] rounded-[16px] z-0 bg-[#D9D9D9]" />
+                </div>
+
+                <div class="flex flex-col items-center w-full lg:w-1/2 max-w-[351px] mx-auto">
+                    <p
+                        class="font-nunito text-[#1D1D1D] text-[24px] font-[700] leading-[32.74px] tracking-[0.003em] mb-[35px] lg:text-[55px] lg:leading-[75.02px] lg:mb-[38px] text-center opacity-0 animate-slidein">
+                        Interesting Collaboration With Us?
+                    </p>
+                    <p
+                        class="font-quicksand text-[14px] font-[400] leading-[24px] tracking-[0.01em] mb-[73px] lg:text-[20px] lg:leading-[32px] lg:mb-[73px] text-[#464646] text-center opacity-0 animate-slidein">
+                        Help you to reach your business goal
+                    </p>
+                    <button
+                        class="w-[146px] min-w-[210px] bg-blue-500 border border-blue-500 text-white px-4 py-2 md:px-[40px] md:py-[12px] rounded-[24px] opacity-0 animate-slidein transition duration-300 hover:shadow-[0px_4px_8px_0px_rgba(55,125,255,0.5)] active:scale-95 font-quicksand text-[12px] leading-[18px] font-bold md:text-[16px] md:leading-[24px] text-center">
+                        Get Started
+                    </button>
 
                 </div>
             </section>
-
         </main>
     </div>
-
     <!-- Footer section -->
-    <footer class="bg-gray-800 text-white text-center p-4 dark:bg-[#383638]">
-        <div class="container mx-auto px-5 sm:px-10 md:px-20 lg:px-32">
-            <p>&copy; 2024 Creative Agency</p>
+    <footer class="pt-11 pb-11 md:pt-20 md:pb-[75px]  bg-gray-800 text-white text-center dark:bg-[#383638]">
+        <div class="container mx-auto">
+            <div
+                class="flex flex-col sm:flex-row flex-wrap sm:justify-between sm:align-middle pt-15 pb-16 md:pt-150 sm:gap-10">
+
+                <!-- Logo Section -->
+                <div class="flex flex-col  mb-4 items-center  md:items-start sm:justify-start">
+                    <a href="#">
+                        <img src="images/logo-footer.svg" alt="Logo" class="w-[187px] h-[88px] rounded-[20px]" />
+                    </a>
+                </div>
+
+                <!-- Terms & Policies Section -->
+                <div class="flex flex-col space-y-4 ">
+                    <h3 class="font-quicksand text-[18px] md:text-[22px] font-bold mb-4">Terms & Policies</h3>
+                    <a href="#" class="text-[18px] md:text-[22px] hover:underline mb-4 text-gray-500">Terms of
+                        Service</a>
+                    <a href="#"
+                        class="text-[18px] md:text-[22px] hover:underline text-customGray text-gray-500">Privacy
+                        Policy</a>
+                </div>
+
+                <!-- Company Section -->
+                <div class="flex flex-col space-y-4 lg:mb-0">
+                    <h3 class="font-quicksand text-[18px] md:text-[22px] font-bold mb-4">Company</h3>
+                    <a href="#" class="text-[18px] md:text-[22px] hover:underline mb-4 text-gray-500">Home</a>
+                    <a href="#" class="text-[18px] md:text-[22px] hover:underline mb-4 text-gray-500">About Us</a>
+                    <a href="#" class="text-[18px] md:text-[22px] hover:underline  text-gray-500">Contact Us</a>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="flex flex-col space-y-4 lg:mb-0">
+                    <h3 class="font-quicksand text-[18px] md:text-[22px] font-bold mb-4">Contact</h3>
+                    <a href="tel:+62893912392190"
+                        class="text-[18px] md:text-[22px] mb-4 hover:underline text-gray-500">(+62)
+                        893912392190</a>
+                    <a href="mailto:agecnycr@gmail.com"
+                        class="text-[18px] md:text-[22px] hover:underline text-gray-500">agecnycr@gmail.com</a>
+                </div>
+
+                <!-- Location Section -->
+                <div class="flex flex-col space-y-4 lg:mb-0">
+                    <h3 class="font-quicksand text-[18px] md:text-[22px] font-bold mb-4">Location</h3>
+                    <p class="text-[18px] md:text-[22px] mb-4 text-gray-500">PT Osiris Real Estate Internasional</p>
+                    <p class="text-[18px] md:text-[22px] mb-4 text-gray-500">Jl. KH. Wahid Hasyim Kel No.10D</p>
+                    <p class="text-[18px] md:text-[22px] mb-4 text-gray-500">Jakarta, Indonesia</p>
+                    <a href="mailto:team@OsirisRealEstate.com"
+                        class="text-[18px] md:text-[22px] hover:underline text-gray-500">team@OsirisRealEstate.com</a>
+                </div>
+
+            </div>
         </div>
+        <!-- Horizontal Line -->
+        <hr class="border-gray-500 mb-5 max-w-full mx-auto" />
+
+        <!-- Social Media Section -->
+        <div class="flex flex-wrap justify-center lg:mb-0 lg:col-span-5 space-x-5 mb-4">
+            <a href="#" class="w-[40px] h-[40px] bg-gray-200 customGray rounded-full flex items-center justify-center">
+                <i class="fab fa-facebook text-gray-500 text-[20px]" ></i></a>
+            <a href="#" class="w-[40px] h-[40px] bg-gray-200 rounded-full flex items-center justify-center"><i class="fab fa-instagram text-gray-500 text-[20px]" ></i></a>
+            <a href="#" class="w-[40px] h-[40px] bg-gray-200 rounded-full flex items-center justify-center"><i class="fab fa-linkedin text-gray-500 text-[20px]" ></i></a>
+            <a href="#" class="w-[40px] h-[40px] bg-gray-200 rounded-full flex items-center justify-center"><i class="fa-regular fa-envelope text-gray-500 text-[20px]" ></i></a>
+            <a href="#" class="w-[40px] h-[40px] bg-gray-200 rounded-full flex items-center justify-center"><i class="fab fa-x-twitter text-gray-500 text-[20px]" ></i></a>
+        </div>
+
+        <div class="text-center mt-4">
+            <p class="text-[18px] md:text-[22px] text-gray-500">Copyright &copy; 2022 Agency Creative. All Rights
+                Reserved</p>
+        </div>
+
     </footer>
+    <!-- section Modal -->
+    <section id="contactFormModal" class="fixed z-10 inset-0 overflow-y-auto hidden bg-white dark:bg-gray-900">
+        <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+        <div class="flex justify-end">
+            <!-- Close Button -->
+            <button id="closeContactForm" class="text-gray-700 hover:text-red-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+        </div>
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Us
+            </h2>
+            <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a technical
+                issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.
+            </p>
+            <form action="https://fabform.io/f/xxxxx" method="post" class="space-y-8">
+                <div>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your
+                        email</label>
+                    <input type="email" id="email"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+                        placeholder="name@flowbite.com" required>
+                </div>
+                <div>
+                    <label for="subject"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Subject</label>
+                    <input type="text" id="subject"
+                        class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+                        placeholder="Let us know how we can help you" required>
+                </div>
+                <div class="sm:col-span-2">
+                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your
+                        message</label>
+                    <textarea id="message" rows="6"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="Leave a comment..."></textarea>
+                </div>
+                <button type="submit"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Send
+                    message</button>
+            </form>
+        </div>
 
-    <!-- Script file -->
-    <script src="script.js" defer></script>
+    </section>
+    </div>
+
+    <!-- Script to toggle loader and main content -->
     <script>
-        // Скрываем основной контент и показываем лоадер
-        setTimeout(() => {
-            document.getElementById('loader').classList.add('hidden');
-            document.getElementById('main-content').classList.remove('hidden');
-        }, 1500);
-
-        window.onload = function () {
-            // Устанавливаем дополнительную задержку перед началом анимации
+        document.addEventListener("DOMContentLoaded", function () {
             setTimeout(() => {
-                const content = document.getElementById('main-content');
-                const animatedElements = content.querySelectorAll('.opacity-0');
-
-                animatedElements.forEach((el, index) => {
-                    setTimeout(() => {
-                        el.classList.remove('opacity-0'); // Убираем класс opacity-0
-                        el.classList.add('animate-slidein'); // Добавляем анимацию
-                    }, index * 300); // Задержка для каждого элемента
-                });
-            }, 1500); // Задержка для анимации
-        };
+                document.getElementById('loader').classList.add('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+            }, 1000);
+        });
     </script>
-
-
-
+    <script src="js/js/script.js" defer></script>
+    <!-- Script file -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/js/swiper-config.js"></script>
+    <script src="js/js/menu.js"></script>
 </body>
 
 </html>

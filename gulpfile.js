@@ -7,97 +7,118 @@ import imagemin from 'gulp-imagemin';
 import imageminMozjpeg from 'imagemin-mozjpeg';
 import imageminOptipng from 'imagemin-optipng';
 import imageminWebp from 'imagemin-webp';
-import through from 'through2'; // Для логирования
+import cleanCSS from 'gulp-clean-css';
+import terser from 'gulp-terser';
+import through from 'through2'; // For logging
 
+// Import 'del' for deleting files/folders asynchronously
 const del = (await import('del')).deleteAsync;
 
-// Инициализация BrowserSync
+// Initialize BrowserSync for live reloading
 const bs = browserSync.create();
 
-// Пути к ресурсам
+// Paths for resources
 const paths = {
     styles: {
-        src: 'src/styles.css',
-        dest: 'dist/css/'
+        src: 'src/styles.css', // Source path for styles
+        dest: 'dist/css/' // Destination path for compiled CSS
     },
     html: {
-        src: 'src/*.html',
-        dest: 'dist/'
+        src: 'src/*.html', // Source path for HTML files
+        dest: 'dist/' // Destination path for HTML files
     },
     scripts: {
-        src: 'src/*.js',
-        dest: 'dist/js/'
+        src: 'src/**/*.js', // Source path for JavaScript files
+        dest: 'dist/js/' // Destination path for compiled JS
     },
     images: {
-        src: 'src/images/**/*.{jpg,jpeg,png,svg,webp}',  // Уточняем типы файлов
-        dest: 'dist/images/'
+        src: 'src/images/**/*.{jpg,jpeg,png,svg,webp}',  // Source path for image files
+        dest: 'dist/images/' // Destination path for optimized images
     }
 };
 
-// Очистка папки dist
+// Clean the 'dist' folder
 const clean = () => del(['dist']);
 
-// Компиляция стилей с использованием Tailwind CSS
+// Compile styles using Tailwind CSS
 const styles = () => {
-    return gulp.src(paths.styles.src)
-        .pipe(sourcemaps.init())
-        .pipe(postcss([tailwindcss])) // TailwindCSS интегрирован через PostCSS
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(paths.styles.dest))
-        .pipe(bs.stream());
+    return gulp.src(paths.styles.src) // Source CSS file
+        .pipe(sourcemaps.init()) // Initialize sourcemaps
+        .pipe(postcss([tailwindcss])) // Integrate TailwindCSS through PostCSS
+        .pipe(sourcemaps.write('.')) // Write sourcemaps
+        .pipe(gulp.dest(paths.styles.dest)) // Output compiled CSS
+        .pipe(bs.stream()); // Stream changes to BrowserSync for live reload
 };
 
-// Обработка HTML
+// Minify CSS
+const minifyCSS = () => {
+    return gulp.src(paths.styles.dest + '*.css') // Path to compiled CSS
+        .pipe(cleanCSS({ compatibility: 'ie8' })) // Minify CSS
+        .pipe(gulp.dest(paths.styles.dest)); // Output path
+};
+
+// Process HTML files
 const html = () => {
-    return gulp.src(paths.html.src)
-        .pipe(gulp.dest(paths.html.dest))
-        .pipe(bs.stream()); // Обновление HTML в браузере
+    return gulp.src(paths.html.src) // Source HTML files
+        .pipe(gulp.dest(paths.html.dest)) // Output HTML files
+        .pipe(bs.stream()); // Stream changes to BrowserSync for live reload
 };
 
-// Обработка JS
+// Process JavaScript files
 const scripts = () => {
-    return gulp.src(paths.scripts.src)
-        .pipe(gulp.dest(paths.scripts.dest))
-        .pipe(bs.stream()); // Обновление JS в браузере
+    return gulp.src(paths.scripts.src) // Source JS files
+        .pipe(gulp.dest(paths.scripts.dest)) // Output JS files
+        .pipe(bs.stream()); // Stream changes to BrowserSync for live reload
 };
 
-// Оптимизация изображений
-// Оптимизация изображений
+// Minify JavaScript
+const minifyJS = () => {
+    return gulp.src(paths.scripts.dest + '*.js') // Path to compiled JS
+        .pipe(terser()) // Minify JavaScript
+        .pipe(gulp.dest(paths.scripts.dest)); // Output path
+};
+
+// Optimize images
 const images = () => {
-    return gulp.src(paths.images.src, { encoding: false }) // Убедитесь, что используется правильный путь
-        .pipe(imagemin([ // Примените плагины оптимизации
-            imageminMozjpeg({ quality: 75, progressive: true }),
-            imageminOptipng({ optimizationLevel: 5 }),
-            imageminWebp({ quality: 75 })
+    return gulp.src(paths.images.src, { encoding: false }) // Source image files
+        .pipe(imagemin([ // Apply image optimization plugins
+            imageminMozjpeg({ quality: 75, progressive: true }), // Optimize JPEG images
+            imageminOptipng({ optimizationLevel: 5 }), // Optimize PNG images
+            imageminWebp({ quality: 75 }) // Convert to WebP format
         ]))
-        .pipe(gulp.dest(paths.images.dest)); // Запись в выходную папку
+        .pipe(gulp.dest(paths.images.dest)); // Output optimized images
 };
 
-
-// Запуск сервера с BrowserSync и наблюдение за файлами
+// Start the BrowserSync server and watch files for changes
 const serve = () => {
     bs.init({
         server: {
-            baseDir: 'dist'
+            baseDir: 'dist' // Base directory for the server
         },
-        port: 3072,
-        ui: false
+        port: 3072, // Port for the server
+        ui: false // Disable the UI
     });
 
-    gulp.watch(paths.styles.src, styles);
-    gulp.watch(paths.html.src, html);
-    gulp.watch(paths.scripts.src, scripts);
-    gulp.watch(paths.images.src, images);
+    // Watch for changes in styles, HTML, JS, and images
+    gulp.watch(paths.styles.src, styles); // Watch styles
+    gulp.watch(paths.html.src, html); // Watch HTML
+    gulp.watch(paths.scripts.src, scripts); // Watch JS
+    gulp.watch(paths.images.src, images); // Watch images
 };
 
-// Задача по умолчанию
-const build = gulp.series(clean, gulp.parallel(styles, html, scripts, images), serve);
+// Default task: clean, build assets, and start the server
+const build = gulp.series(
+    clean,
+    gulp.parallel(styles, html, scripts, images),
+    gulp.parallel(minifyCSS, minifyJS), // Add minification here
+    serve
+);
 
-// Отдельные задачи для изображений и очистки
+// Export individual tasks for images and cleaning
 gulp.task('images', images);
 gulp.task('styles', styles);
 gulp.task('clean', clean);
+gulp.task('default', build);
 
-// Экспорт по умолчанию
+// Default export for the Gulp build
 export default build;
-
