@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 body {
-    background-color: theme('colors.primary.light');
+    /* background-color: theme('colors.primary.light'); */
 }
 
 /* body.dark {
-    background-color: theme('colors.primary.dark'); 
+    background-color: theme('colors.primary.dark');
 } */
 
 .opacity-0 {
@@ -16,11 +16,11 @@ body {
 }
 
 .animate-slidein {
-    opacity: 1; 
-    animation: slidein 0.5s forwards; 
+    opacity: 1;
+    animation: slidein 0.5s forwards;
 }
 .custom-pagination {
-    margin-top: 40px; 
+    margin-top: 40px;
 }
 html {
     scroll-behavior: smooth;

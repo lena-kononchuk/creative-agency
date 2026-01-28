@@ -30,7 +30,7 @@ smoothScrollLinks.forEach(link => {
 
         if (targetSection) {
             // Close mobile menu if visible
-            mobileMenu.classList.add('hidden');
+            // mobileMenu.classList.add('hidden');
 
             // Smooth scroll to the section
             targetSection.scrollIntoView({ behavior: 'smooth' });

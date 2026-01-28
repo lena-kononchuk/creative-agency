@@ -10,7 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Modern creative agency landing page with Tailwind CSS, dark mode, and responsive design",
   "devDependencies": {
     "@babel/core": "^7.25.8",
     "@babel/preset-env": "^7.25.8",
